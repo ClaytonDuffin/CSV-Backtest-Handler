@@ -1,6 +1,6 @@
 # CSV-Backtest-Handler
 
-Program used to process and visualize the performance of one or more backtests stored in CSV format. 
+Program for processing and visualizing the performance of one or more backtests stored in CSV format.
 
 Useful tool for swiftly dealing with variable-length data, which is an inevitable part of the backtesting process. Also streamlines visualization, since the tool can be used to cycle through and quickly visualize a number of backtests stored in CSV format, granted those files are named appropriately.
 
