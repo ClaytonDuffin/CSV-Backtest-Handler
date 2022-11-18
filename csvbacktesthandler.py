@@ -31,7 +31,7 @@ class CSVBacktestHandler:
             self._underlyingReturns = pd.read_csv((underlyingCSVName + str('.csv')))
             self._tickerSymbol = underlyingCSVName[:-14]
         
-        self._concatenatedFrames = self.Composer()
+        self._concatenatedFrames = self.composer()
     
 
     def roundDown(self, number, divisor):
@@ -55,7 +55,7 @@ class CSVBacktestHandler:
         return (indices)
     
     
-    def Adjuster(self):
+    def adjuster(self):
                 
         '''Method for replacing index of original backtest series with newly required index spacing.'''
 
@@ -68,12 +68,12 @@ class CSVBacktestHandler:
         return (self._backtestReturns)
         
             
-    def Composer(self):
+    def composer(self):
         
         '''Method for putting backtest and underlying frames together. Adds 0 to both the head and tail of backtested returns,
             so that interpolation will be possible. Also adds and computes two columns for two methods of interpolation.'''
         
-        concatenatedFrames = pd.concat([self._underlyingReturns, self.Adjuster()], axis=1)
+        concatenatedFrames = pd.concat([self._underlyingReturns, self.adjuster()], axis=1)
         
         if (pd.isnull(concatenatedFrames.iloc[0,5])):
             concatenatedFrames.at[0,'backtestReturns'] = 0
