@@ -14,7 +14,7 @@ class CSVBacktestHandler:
     '''Class for processing and plotting backtested performance against the performance of respective
         asset(s) for a given period. Assumes that this data was generated and stored in CSV format.'''
     
-    def __init__(self, backtestCSVName, underlyingCSVName):
+    def __init__(self, backtestCSVName: str, underlyingCSVName: str) -> None:
         
         '''Constructor takes in input two strings, representing the filenames of desired frames
             in (backtest,underlying) order.'''''
@@ -34,14 +34,14 @@ class CSVBacktestHandler:
         self._concatenatedFrames = self.composer()
     
 
-    def roundDown(self, number, divisor):
+    def roundDown(self, number: int, divisor: int) -> int:
         
         '''Method to be used in determination of spacing for x-axis major ticks in equity curve plot.'''
 
         return (math.floor(number / divisor) * divisor)
 
 
-    def preAdjuster(self):
+    def preAdjuster(self) -> list:
                
         '''Method used to make datasets compatible in terms of divisibility and what not.
             Also, locates indices where backtest returns are to be placed in the underlying series,
@@ -55,7 +55,7 @@ class CSVBacktestHandler:
         return (indices)
     
     
-    def adjuster(self):
+    def adjuster(self) -> pd.DataFrame:
                 
         '''Method for replacing index of original backtest series with newly required index spacing.'''
 
@@ -68,7 +68,7 @@ class CSVBacktestHandler:
         return (self._backtestReturns)
         
             
-    def composer(self):
+    def composer(self) -> pd.DataFrame:
         
         '''Method for putting backtest and underlying frames together. Adds 0 to both the head and tail of backtested returns,
             so that interpolation will be possible. Also adds and computes two columns for two methods of interpolation.'''
@@ -91,7 +91,7 @@ class CSVBacktestHandler:
         return (concatenatedFrames)
 
 
-    def equityCurvePlot(self):
+    def equityCurvePlot(self) -> None:
        
         '''Method for plotting cumulative percentage change data of backtested and underlying returns.'''
 
@@ -113,7 +113,7 @@ class CSVBacktestHandler:
         plt.pause(.01)
         
         
-    def equityCurveDistribution(self):
+    def equityCurveDistribution(self) -> None:
         
         '''Method for plotting distribution(s) of percentage change data for backtested and underlying returns.'''
         
