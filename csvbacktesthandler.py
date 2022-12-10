@@ -110,7 +110,7 @@ class CSVBacktestHandler:
         ax1.minorticks_on()
         ax1.grid(which = 'both', linestyle = '-', linewidth = '1', color = 'dimgrey')
         ax1.grid(which = 'minor', linestyle = ':', linewidth = '1', color = 'grey')
-        plt.pause(.01)
+        plt.pause(0.01)
         
         
     def equityCurveDistribution(self) -> None:
@@ -127,7 +127,7 @@ class CSVBacktestHandler:
         ax1.minorticks_on()
         ax1.grid(which = 'both', linestyle = '-', linewidth = '1', color = 'dimgrey')
         ax1.grid(which = 'minor', linestyle = ':', linewidth = '1', color = 'grey')
-        plt.pause(.01)
+        plt.pause(0.01)
         
         
 backtestObject = CSVBacktestHandler('SPXBacktestOnSubset20220422.csv','SPXSubset20220422.csv')
