@@ -14,7 +14,9 @@ class CSVBacktestHandler:
     '''Class for processing and plotting backtested performance against the performance of respective
         asset(s) for a given period. Assumes that this data was generated and stored in CSV format.'''
     
-    def __init__(self, backtestCSVName: str, underlyingCSVName: str) -> None:
+    def __init__(self,
+                 backtestCSVName: str,
+                 underlyingCSVName: str) -> None:
         
         '''Constructor takes in input two strings, representing the filenames of desired frames
             in (backtest,underlying) order.'''''
@@ -34,7 +36,9 @@ class CSVBacktestHandler:
         self._concatenatedFrames = self.composer()
     
 
-    def roundDown(self, number: int, divisor: int) -> int:
+    def roundDown(self,
+                  number: int,
+                  divisor: int) -> int:
         
         '''Method to be used in determination of spacing for x-axis major ticks in equity curve plot.'''
 
