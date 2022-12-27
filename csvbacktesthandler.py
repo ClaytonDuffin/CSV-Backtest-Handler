@@ -11,15 +11,24 @@ plt.rc('figure', max_open_warning = 0)
 
 class CSVBacktestHandler:
     
-    '''Class for processing and plotting backtested performance against the performance of respective
-        asset(s) for a given period. Assumes that this data was generated and stored in CSV format.'''
+    '''
+    Class for processing and plotting backtested performance against the performance of respective
+    asset(s) for a given period. Assumes that this data was generated and stored in CSV format.
+    
+    Parameters
+    ----------
+    backtestCSVName : str
+        Path to the file containing the backtested trades represented as a percentage change series.
+    underlyingCSVName : str
+        Path to the file containing the underlying asset time series. There is no need to manipulate this frame for input.    
+    '''
     
     def __init__(self,
                  backtestCSVName: str,
                  underlyingCSVName: str) -> None:
         
         '''Constructor takes in input two strings, representing the filenames of desired frames
-            in (backtest,underlying) order.'''''
+           in (backtest,underlying) order.'''''
         
         if backtestCSVName[-4:] == '.csv':
             self._backtestReturns = pd.read_csv(backtestCSVName)
@@ -40,7 +49,16 @@ class CSVBacktestHandler:
                   number: int,
                   divisor: int) -> int:
         
-        '''Method to be used in determination of spacing for x-axis major ticks in equity curve plot.'''
+        '''
+        Method to be used in determination of spacing for x-axis major ticks in equity curve plot.
+
+        Parameters
+        ----------
+        number : int
+            Number to be rounded down.
+        divisor : int
+            Divisor to used for rounding the number down to varying amounts of digits. 
+        '''
 
         return (math.floor(number / divisor) * divisor)
 
@@ -48,8 +66,8 @@ class CSVBacktestHandler:
     def preAdjuster(self) -> list:
                
         '''Method used to make datasets compatible in terms of divisibility and what not.
-            Also, locates indices where backtest returns are to be placed in the underlying series,
-            and how far the spread between those indices must be.'''
+           Also, locates indices where backtest returns are to be placed in the underlying series,
+           and how far the spread between those indices must be.'''
            
         fullIndexSet = np.arange(0,(len(self._underlyingReturns)), math.floor(len(self._underlyingReturns)/len(self._backtestReturns)))
         numberOfExtraIndices = (len(fullIndexSet) - len(self._backtestReturns))
@@ -75,7 +93,7 @@ class CSVBacktestHandler:
     def composer(self) -> pd.DataFrame:
         
         '''Method for putting backtest and underlying frames together. Adds 0 to both the head and tail of backtested returns,
-            so that interpolation will be possible. Also adds and computes two columns for two methods of interpolation.'''
+           so that interpolation will be possible. Also adds and computes two columns for two methods of interpolation.'''
         
         concatenatedFrames = pd.concat([self._underlyingReturns, self.adjuster()], axis=1)
         
